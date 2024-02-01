@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Declaring the character encoding and viewport settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+</head>
+<body>
+    <!-- Including Vue.js library -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- Including Axios library for making HTTP requests -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+    <!-- Rendering the Vue template -->
+    <div id="App">
+        
+    </div>
+
+    <!-- Defining the script containing the logic -->
+    <script>
+
+        // Creating a new Vue app
+        const vm = Vue.createApp({
+
+            // Defining data properties
+            data() {
+                return {
+                    text : 'Opened',
+                    open : true
+                }
+            },
+            // Defining methods for handling events
+            methods: {
+                
+            },
+            // Defining computed properties
+            computed:{
+                label() {
+                    return this.open ? 'Block' : 'Open';
+                },
+                bgstyles() {
+                    return this.open ? ['bgopened'] : ['bgclosed']
+                },
+                bgbutton() {
+                    return this.open ? ['closed'] : ['opened']
+                }
+            },
+            // Defining watchers to observe changes
+            watch : {
+                open(newValue,oldValue) {
+                    if(!newValue) {
+                        this.text = 'Blocked'
+                    }  else {
+                        this.text = 'Opened'
+                    }
+                }
+            },
+            // Defining the template for rendering
+            template : `
+                <div class="container" :class="bgstyles">
+                    <button class="button" :class="bgbutton" @click="open = !open">{{label}}</button>
+                    <h2 class="message">{{text}}</h2>
+                </div>
+            `
+        }).mount('#App');
+
+    </script>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        #App{
+            width: 100%;
+            height: 100vh;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .button{
+            border-radius: 15px;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0 auto;
+        }
+        .message{
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 20px;
+        }
+        .closed{
+            background-color: #FF0000;
+        }
+        .opened{
+            background-color: #008000;
+        }
+        .bgclosed{
+            background-color: #eca1a6;
+        }
+        .bgopened{
+            background-color: #b5e7a0;
+        }
+    </style>
+</body>
+</html>
